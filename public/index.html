@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Adult Drug Book CSV to JSON Converter</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style>
+      /*GLOBAL*/
+        .fnt-monospace{
+            font-family: monospace !important;
+        }
+        .bg-grey{
+            background-color: #ccc !important;
+        }
+        /*HEADER*/
+        .header{
+
+            border: #ccc 3px solid;
+        }
+        .header:hover{
+            background-color: #eee;
+            border: #ad0000 3px solid;
+        }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!--HEADER-->
+      <div id="dropFile" class="my-5 py-5 bg-grey text-center text-uppercase header fnt-monospace">
+        <h1 class="my-5">Adult Drug Book <br> CSV to JSON Converter</h1>
+        <p class="lead">Drop Files Here</p>
+      </div>
+      <!--INPUT-->
+      <div class="mx-auto my-5 py-5 text-center">
+        <p>or...</p>
+        <label>Select File: </label>
+        <input id="uploadFile" class="mx-auto fnt-monospace" type="file" accept=".csv" />
+      </div>
+      <!-- RESULT -->
+      <div id="result"></div>
+    </div>
+
+    <!--Scripts-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/siofu/client.js"></script>
+    <script>
+      $(() => {
+        //Connects page to server
+        const socket = io.connect();
+        const uploader = new SocketIOFileUpload(socket);
+        uploader.listenOnInput(document.getElementById("uploadFile"));
+        uploader.listenOnDrop(document.getElementById("dropFile"));
+      });
+
+    </script>
+  </body>
+
+</html>
