@@ -15,7 +15,7 @@ const convertJson = (filePath) => {
 		quote: '"' // optional
 	};
 	//Creates json
-	const jsonArray = csvjson.toSchemaObject(data, options);
+	const jsonArray = csvjson.toObject(data, options);
 	return jsonArray;
 };
 
